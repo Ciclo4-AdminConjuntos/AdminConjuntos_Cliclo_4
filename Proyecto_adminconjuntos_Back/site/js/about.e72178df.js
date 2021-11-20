@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(n,a,t){"use strict";t.r(a);var e=function(){var n=this,a=n.$createElement,t=n._self._c||a;return t("v-app",{attrs:{id:"inspire"}},[t("v-main")],1)},i=[],p=t("2877"),r=t("6544"),s=t.n(r),u=t("7496"),c=t("f6c4"),l={},o=Object(p["a"])(l,e,i,!1,null,null,null);a["default"]=o.exports;s()(o,{VApp:u["a"],VMain:c["a"]})}}]);
+//# sourceMappingURL=about.e72178df.js.map
