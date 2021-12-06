@@ -3,16 +3,20 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
+ var corsOptions = {
+  origin: "http://localhost:3001",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+}; 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "site")))
+//app.use(express.static(path.join(__dirname, "site")))
 
 app.use(express.urlencoded({extended: true}))
 
 // rutas
-
+app.use("/api", require("./src/routes/routes"))
 
 if (process.env.NODE_ENV === 'production'){
   app.use("/api", require("./src/routes/routes"))
