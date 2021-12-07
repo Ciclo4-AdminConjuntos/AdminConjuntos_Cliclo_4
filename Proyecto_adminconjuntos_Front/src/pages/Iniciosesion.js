@@ -1,20 +1,10 @@
-
-
-// //import { useState } from "react";
-// import logoConjunto from "../img/logo_transparent.png";
-// import "../App.css";
-// import Bar from '../components/Navbar/Bar';
-// import Login from '../components/Login/Login';
-
-// axios.defaults.withCredentials = true;
-
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -24,7 +14,11 @@ import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types'
 import { useState } from "react";
 import axios from "axios";
-import { browserHistory } from 'react-router-dom';
+
+
+
+
+
 
 // import fondoLogin from '../img/'
 
@@ -64,7 +58,8 @@ const Iniciosesion = () => {
   const [password, setPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
-  const [successful, setSuccessfull] = useState("");
+  const [successful, setSuccessfull] = useState("");  
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,12 +73,8 @@ const Iniciosesion = () => {
         .then(res => {
           localStorage.setItem ('jwtToken',res.data.token)
           console.log(res.data)
-          this.props.browserHistory.push("/noticias")
-          .catch(err =>{
-            console.error(err)
-            this.errors.push(err)
-            console.log(this.errors)
-          })
+          navigate("/noticias")
+        
         })
   };
 

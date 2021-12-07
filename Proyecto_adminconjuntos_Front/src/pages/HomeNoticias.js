@@ -24,7 +24,8 @@ import Add from "./Add";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useState } from "react";
 import { Add as AddIcon } from "@material-ui/icons";
-import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
+import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import { useNavigate } from "react-router-dom";
 //
 import {
   Fab,
@@ -37,11 +38,11 @@ import {
   RadioGroup,
   TextField,
 } from "@material-ui/core";
-// 
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CreditScoreTwoToneIcon from '@mui/icons-material/CreditScoreTwoTone';
+//
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
 
 // Home
 
@@ -73,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
   },
 }));
-
 
 const drawerWidth = 240;
 
@@ -122,13 +122,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function HomeNoticias() {
   const classes = useStyles();
   const [open2, setOpen2] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = (event, reason) => {
     console.log("creado");
@@ -145,6 +146,10 @@ export default function HomeNoticias() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  const handleLogout = () => {
+    window.localStorage.removeItem("jwtToken");
+    navigate("/");
+  };
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -152,7 +157,7 @@ export default function HomeNoticias() {
   const bull = (
     <Box
       component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
     >
       •
     </Box>
@@ -213,6 +218,7 @@ export default function HomeNoticias() {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+          <Button onClick={handleLogout}>Cerrar sesion</Button>
         </List>
         {/* inicio modal agregar Noticias */}
         <Tooltip title="Add" aria-label="add" onClick={() => setOpen2(true)}>
@@ -224,7 +230,7 @@ export default function HomeNoticias() {
           <Container className={classes.container}>
             <form className={classes.form} autoComplete="off">
               <div className={classes.item}>
-              <h5 style={{ textAlign: "center" }}>AGREGAR NOTICIA</h5>
+                <h5 style={{ textAlign: "center" }}>AGREGAR NOTICIA</h5>
                 <TextField
                   id="standard-basic"
                   label="Title"
@@ -234,22 +240,19 @@ export default function HomeNoticias() {
               </div>
               <div className={classes.item}>
                 <TextField
-                    
                   id="outlined-multiline-static"
                   multiline
                   rows={4}
-                  
                   variant="outlined"
                   label="Description"
                   size="small"
                   style={{ width: "100%" }}
                 />
               </div>
-              
-              
+
               <div className={classes.item}>
                 <Button
-                 style={{ align: "center" }}
+                  style={{ align: "center" }}
                   variant="outlined"
                   color="primary"
                   style={{ marginRight: 20 }}
@@ -258,7 +261,7 @@ export default function HomeNoticias() {
                   Publicar
                 </Button>
                 <Button
-                 style={{ alignItems: "center" }}
+                  style={{ alignItems: "center" }}
                   variant="outlined"
                   color="secondary"
                   onClick={() => setOpen2(false)}
@@ -282,17 +285,17 @@ export default function HomeNoticias() {
         {/* cartas */}
       </Drawer>
       <Main open={open}>
-        <DrawerHeader />        
+        <DrawerHeader />
         <Card sx={{ minWidth: 275 }}>
-
-        <ListItemIcon>
-                <div> 
-                <Button onClick={() => setOpen2(true)}>
-                <DeleteForeverTwoToneIcon  />
-                </Button>
+          <ListItemIcon>
+            <div>
+              <Button onClick={() => setOpen2(true)}>
                 <CreditScoreTwoToneIcon />
-                </div>               
-             
+              </Button>
+              <Button onClick={() => setOpen2(true)}>
+                <DeleteForeverTwoToneIcon />
+              </Button>
+            </div>
           </ListItemIcon>
 
           <CardContent>
@@ -301,23 +304,79 @@ export default function HomeNoticias() {
               color="text.secondary"
               gutterBottom
             >
-              Word of the Day
+              07/12/2021 2:15 pm
             </Typography>
             <Typography variant="h5" component="div">
-              be{bull}nev{bull}o{bull}lent
+              Friendly Pets
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
+              participa en el show de mascotas
             </Typography>
             <Typography variant="body2">
-              well meaning and kindly.
+              Reglas del Juego: 1. Tu mascota debe estar correctamente
+              deparasitada y vacunada Si vas a un lugar público donde admiten
+              mascotas, deberás asegurarte de que la tuya está sin pulgas, ni
+              garrapatas y, además, tiene al día todas sus vacunas. No solo
+              evitarás pegárselas a otros animales, sino que tu mascota tampoco
+              se contagiará en caso de que algún animal presente no cumpla las
+              normas. 2. Lleva su cartilla Esta es una de las cosas de las que
+              siempre nos olvidamos. Es normal que cuando sacas de paseo a tu
+              perro no te metas su cartilla en el bolsillo, sin embargo, en
+              algunos sitios como los hoteles pet-friendly, te la pedirán para
+              comprobar que tiene todas sus revisiones al día.
               <br />
               {'"a benevolent smile"'}
             </Typography>
           </CardContent>
-          <CardActions>
-          
-          </CardActions>
+          <CardActions></CardActions>
+        </Card>
+      </Main>
+      {/* segunda accion */}
+      <Main open={open}>
+        <DrawerHeader />
+        <Card sx={{ minWidth: 275 }}>
+          <ListItemIcon>
+            <div>
+              <Button onClick={() => setOpen2(true)}>
+                <CreditScoreTwoToneIcon />
+              </Button>
+              <Button onClick={() => setOpen2(true)}>
+                <DeleteForeverTwoToneIcon />
+              </Button>
+            </div>
+          </ListItemIcon>
+
+          <CardContent>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              07/12/2021 2:15 pm
+            </Typography>
+            <Typography variant="h5" component="div">
+              Friendly Pets
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              participa en el show de mascotas
+            </Typography>
+            <Typography variant="body2">
+              Reglas del Juego: 1. Tu mascota debe estar correctamente
+              deparasitada y vacunada Si vas a un lugar público donde admiten
+              mascotas, deberás asegurarte de que la tuya está sin pulgas, ni
+              garrapatas y, además, tiene al día todas sus vacunas. No solo
+              evitarás pegárselas a otros animales, sino que tu mascota tampoco
+              se contagiará en caso de que algún animal presente no cumpla las
+              normas. 2. Lleva su cartilla Esta es una de las cosas de las que
+              siempre nos olvidamos. Es normal que cuando sacas de paseo a tu
+              perro no te metas su cartilla en el bolsillo, sin embargo, en
+              algunos sitios como los hoteles pet-friendly, te la pedirán para
+              comprobar que tiene todas sus revisiones al día.
+              <br />
+              {'"a benevolent smile"'}
+            </Typography>
+          </CardContent>
+          <CardActions></CardActions>
         </Card>
       </Main>
     </Box>
