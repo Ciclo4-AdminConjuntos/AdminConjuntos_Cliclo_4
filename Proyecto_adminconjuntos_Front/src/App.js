@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 //import { BrowserRouter, Routes, Route,Switch  } from "react-router-dom";
 import { BrowserRouter, Route,Routes  } from 'react-router-dom';
+import Add from "./pages/Add";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         
         <Route exact path="/" element={<Iniciosesion />} />
         <Route exact path="/noticias" element={<MuroNoticias />} />
+        <Route exact path="/AgregarNoticia" element={<Add />} />
         
       </Routes>
     </div>
