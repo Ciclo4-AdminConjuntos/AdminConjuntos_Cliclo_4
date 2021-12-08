@@ -7,13 +7,13 @@ const path = require("path");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "site")))
+// app.use(express.static(path.join(__dirname, "site")))
 
 app.use(express.urlencoded({extended: true}))
 
 // rutas
 
-
+app.use("/api", require("./src/routes/routes"))
 if (process.env.NODE_ENV === 'production'){
   app.use("/api", require("./src/routes/routes"))
   app.use(express.static(__dirname+'/site'))
