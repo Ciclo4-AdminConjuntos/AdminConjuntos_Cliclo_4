@@ -39,9 +39,12 @@ router.get(
   "/Usuarios/all",
   UsuariosController.getAll
 );
+// router.get("/Usuarios/:id", UsuariosController.getById);
 router.get("/Usuarios/:id", UsuariosController.getById);
 router.delete("/Usuarios/:id", UsuariosController.deleteById);
+
 router.post("/Usuarios/", UsuariosController.create);
+
 router.put("/Usuarios/:id/", UsuariosController.updateById);
 
 //Rutes Contaduria
